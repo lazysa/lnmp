@@ -3,7 +3,7 @@
  #* Blog:    www.chenxu.info
  #* Filename:		init.sh
  #* Description:  init install environment  
- #* Last modified:	2015-08-12 16:21
+ #* Last modified:	2015-08-12 18:51
  #* *****************************************************************************/
 #!/bin/bash
  
@@ -39,5 +39,53 @@ else
 fi
 
 
+function Check_Mysql {
+# Remove Pre-Built ( yum ) version or others source version 
+# Check Mysql is install, remove Pre-Built version
+
+rpm -qa mysql |grep mysql
+if [ $? -eq 0 ]; then
+        echo "Removing Mysql..."
+        yum remove mysql -y
+
+elif [ -d /usr/local/mysql/ ]; then
+         echo "Mysql already installed by Sources"
+         read -p "Enter old 'Mysql Sources dir', (eg: /opt/downloads/mysql-5.6.21/:  )    " Mysql_old_dir
+         echo "Removing Mysql..."
+         cd $Mysql_old_dir && make uninstall ; make clean && cd /usr/local/ && rm -fr  mysql/
+fi
+}
+
+
+function Check_Apache  {
+# Check Apache is install, remove Pre-Built version
+rpm -qa httpd |grep httpd
+if [ $? -eq 0 ]; then
+        echo "Removing Apache..."
+        yum remove httpd -y
+
+elif [ -d /usr/local/apache/ ]; then
+         echo "Apache already installed by Sources"
+         read -p "Enter old 'Apache Sources dir', (eg: /opt/downloads/httpd-2.4.12/:   )    " Apache_old_dir
+         echo "Removing Apache..."
+         cd $Mysql_old_dir && make uninstall ; make clean && cd /usr/local/ && rm -fr apache/
+fi
+}
+
+
+function Check_PHP {
+# Check PHP is install, remove Pre-Built version
+rpm -qa php |grep php
+if [ $? -eq 0 ]; then
+        echo "Removing PHP..."
+        yum remove php -y
+
+elif [ -d /usr/local/php/ ]; then
+         echo "Php already installed by Sources"
+         read -p "Enter old 'PHP Sources dir', (eg: /opt/downloads/php5.3.3/:    )" PHP_old_dir
+         echo "Removing PHP..."
+         cd $Mysql_old_dir && make uninstall ; make clean && cd /usr/local/ && rm -fr  php/
+fi
+}
 
 
