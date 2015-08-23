@@ -2,7 +2,7 @@
  #* Author:  Josery.
  #* Blog:    www.chenxu.info
  #* Filename:		mysql.sh
- #* Description:   
+ #* Description:  Install script for the MySQL Server
  #* Last modified:	2015-08-21 15:30
  #* *****************************************************************************/
 #!/bin/bash
@@ -28,7 +28,7 @@ if [ $? -eq 0 ]; then
 		echo -e "\033[;32m You has been installed MySQL via yum is detected, Removing MySQL ... \033[0m"
         yum remove mysql -y
 
-elif [ -d /usr/local/mysql/ ]; then
+elif [ -d "$Mysql_base" ]; then
          echo -e  "\033[;32m MySQL already installed by Sources \033[0m"
          read -p "Enter old 'MySQL Sources dir',  (eg: /opt/downloads/mysql-5.6.21/:  )    " Mysql_old_dir
          echo -e "\033[;32m Removing MySQL ... \033[0m"
@@ -37,7 +37,7 @@ fi
 }
 
 
-function Install_Mysql_5.6 {
+function Install_Mysql-5.6 {
 
 	
 clear 
@@ -81,14 +81,14 @@ chmod a+x /etc/init.d/mysqld
 /usr/local/mysql/scripts/mysql_install_db --basedir=/usr/local/mysql --datadir=/data0/mysql --user=mysql    
 /etc/init.d/mysqld start 
 
-# Set root's variable
+# Add $Mysql_base to root's variable
 sed -i 's#^PATH=.*#&:/usr/local/mysql/bin#' ~/.bash_profile
 source  ~/.bash_profile
 
-# Set MySQL's root password is: 123456 
+# Set Mysql's root password is: '123456' 
 mysql -uroot -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('123456');"
 
-echo -e "============= \033[;32m  MySQL-5.6.26 is installed \033[0m ================="
+echo -e "============= \033[;32m  MySQL-5.6.26 has been installed \033[0m ================="
 
 }
 
