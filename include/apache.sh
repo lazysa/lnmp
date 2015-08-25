@@ -2,14 +2,15 @@
  #* Author:  Josery.
  #* Blog:    www.chenxu.info
  #* Filename:		apache.sh
- #* Description: Install script for the Apache HTTP Server 
+ #* Description:    Auto-Install script for the Apache HTTP Server 
  #* Last modified:	2015-08-21 23:51
  #* *****************************************************************************/
 #!/bin/bash
  
  
-Apache_base='/usr/local/apache'
-Apache_libdir='/var/lib/httpd/httpd.sock'
+. init.sh
+. download_url.sh
+. version.sh
 
 
 function Chenck_Apache {
@@ -18,7 +19,7 @@ function Chenck_Apache {
 clear 
 echo -e "============= \033[;34m Begin Apache_install Check \033[0m ================="
 
-rpm -qa httpd |grep -oP "^httpd-\d.*"
+rpm -qa |grep -oP "^httpd-\d.*"
 if [ $? -eq 0 ]; then
 		clear 
 		echo -e "\033[;32m You has been installed Apache via yum is detected, Removing Apache ... \033[0m"
@@ -36,20 +37,22 @@ fi
 function Install_Apache-2.4 {
 
 clear 
-echo -e "============= \033[;34m Begin Install Httpd-2.4.16 \033[0m ================="
+echo -e "============= \033[;34m Begin Install $Apache_2.4_ver \033[0m ================="
 
 yum install pcre-devel -y 
 
-# Download/install Apr and Apr_util
+# Download Apr/Apr_util and PHP
 cd $Download_dir 
-wget $Apr_url $Apr_util_url $Httpd_url
+wget $Apr_url $Apr_util_url $Apache_2.4_url
 
-tar -jxf httpd-2.4.16./bin/tar.bz2 
-tar -jxf apr-1.5.2./bin/tar.bz2 
-tar -jxf apr-util-1.5.4./bin/tar.bz2 
 
-cp -fr apr-1.5.2 httpd-2.4.16/srclib/apr 
-cp -fr apr-util-1.5.4 httpd-2.4.16/srclib/apr-util 
+# Install Apr/Apr_util
+tar -zxf  $Apache_2.4_ver.tar.gz 
+tar -zxf $Apr_ver.tar.gz 
+tar -zxf $Apr_util_ver.tar.gz 
+
+cp -fr $Apr_ver $Apache_2.4_ver/srclib/apr 
+cp -fr $Apr_util_ver $Apache_2.4_ver/srclib/apr-util 
 
 
 # ======== Install Apache ========
@@ -58,11 +61,11 @@ groupadd www
 useradd -G www -s /sbin/nologin apache
 
 # Create dir and set owner
-for i in /var/lib/httpd /var/log/httpd ; do 
+for i in $Apache_libdir $Apache_logdir ; do 
 mkdir -p $i && chown -R apache:www $i 
 done 
 
-cd httpd-2.4.16 
+cd $Apache_2.4_ver
 ./configure --prefix=$Apache_base --with-included-apr --enable-so --enable-deflate=shared --enable-expires=shared --enable-ssl=shared --enable-headers=shared --enable-rewrite=shared --enable-static-support --with-mpm=worker
 make && make install
 
@@ -70,13 +73,10 @@ make && make install
 cp build/rpm/httpd.init /etc/init.d/httpd  
 chmod a+x /etc/init.d/httpd 
 chkconfig --add httpd 
-ln -s /usr/local/apache /etc/httpd  
-ln -s /usr/local/apache/bin/httpd /usr/sbin/httpd 
-ln -s /usr/local/apache/bin/apachectl /usr/sbin/apachectl 
 sed -i.bak "/^httpd/i httpd=\'/usr/local/apache/bin/httpd\'" /etc/init.d/httpd
 sed -i "/^pidfile/i pidfile=\'/var/lib/httpd/httpd.pid'" /etc/init.d/httpd
 
-# Change apache run_user: apache
+# Change Apache run_user: apache
 sed -i.bak '/daemon$/s/daemon/apache/' /etc/httpd/conf/httpd.conf
 
 # Add support for php type, included index 
@@ -85,7 +85,7 @@ sed -i '/[^#]AddType.*phtml$/a   AddType application/x-httpd-php-source .phps' /
 sed -i 's/\([^#] DirectoryIndex.*\)/\1 index.php/' /etc/httpd/conf/httpd.conf
 
 # Create test index_file 
-cat > /usr/local/apache/htdocs/index.php << END 
+cat > $Apache_base/htdocs/index.php << END 
 <?php
 phpinfo();
 ?>
@@ -93,11 +93,14 @@ END
 
 
 # Add $Apache_base to root's user_variable
-sed -i 's#^PATH=.*#&:/usr/local/httpd/sbin#' ~/.bash_profile
+sed  -i.bak "/^# User/a Apache_home='/usr/local/apache'" ~/.bash_profile
+sed -i 's#^PATH=.*#&:$Apache_home/bin#' ~/.bash_profile
 source  ~/.bash_profile
+
+# Start Apache service 
 /etc/init.d/httpd start 
 
-echo -e "============= \033[;32m  httpd-2.4.16 has been installed \033[0m ================="
+echo -e "============= \033[;32m  $Apache_2.4_ver has been installed \033[0m ================="
 
 }
 
@@ -105,11 +108,11 @@ echo -e "============= \033[;32m  httpd-2.4.16 has been installed \033[0m ======
 function Remove_Apache {
 
 clear 
-echo -e "============= \033[;34m  Begin Remove httpd-2.4.16  \033[0m ================="
-if [ -d $Mysql_base ]; then 
-	cd $Mysql_base && rm -fr $Mysql_base
+echo -e "============= \033[;34m  Begin Remove $Apache_2.4_ver  \033[0m ================="
+if [ -d $Apache_base ]; then 
+	cd /usr/local/ && rm -fr apache
 else 
-	echo -e "\033[;31m  httpd not install, exit \033[0m "
+	echo -e "\033[;31m  $Apache_2.4_ver not install, exit \033[0m "
 	exit 2
 fi
 
