@@ -17,24 +17,24 @@ read -p "Enter your choice (1, 2, 3, 4 or 5): , otherwise select "1" DBSelect
 
 case $DBSelect in 
     1)
-	    echo "You will install MySQL-5.6.26"
-	;;
+	  echo "You will install MySQL-5.6.26"
+	  ;;
 	2)
-		echo "You will install MySQL-5.6.26"
-	;;
+	  echo "You will install MySQL-5.6.26"
+	  ;;
 	3)
-		echo "You will install MySQL-5.6.26"
-	;;
+	  echo "You will install MySQL-5.6.26"
+	  ;;
 	4)
-		echo "You will install MySQL-5.6.26"
-	;;
+	  echo "You will install MySQL-5.6.26"
+	  ;;
 	5)
-		echo "You will install MySQL-5.6.26"
-	;;
+	  echo "You will install MySQL-5.6.26"
+	  ;;
 	*)
-		echo "No input,You will install MySQL-5.6.26"
-		DBSelect="1"
-	;;	
+	  echo "No input,You will install MySQL-5.6.26"
+	  DBSelect="1"
+	  ;;	
 esac
 
 	
@@ -71,15 +71,14 @@ read -p "Enter your choice (1, 2): , otherwise select 1" NginxSelect
 
 case $NginxSelect in 
     1)
-	    echo "You will Nginx-1.8"
-	;;
+	  echo "You will Nginx-1.8"
+	  ;;
 	2)
-		echo "You will install Nginx-1.6"
-	;;
+	  echo "You will install Nginx-1.6"
+	  ;;
 	*)
-		echo "No input,You will install Nginx-1.8"
-		NginxSelect="1"
-	;;
+	  echo "No input,You will install Nginx-1.8"
+	  NginxSelect="1"
 esac
 
 
@@ -99,24 +98,23 @@ read -p "Enter your choice (1, 2, 3, 4 or 5): , otherwise select 1" PHPSelect
 
 case $PHPSelect in 
     1)
-	    echo "You will install PHP-5.6.12"
-	;;
+	  echo "You will install PHP-5.6.12"
+	  ;;
 	2)
-		echo "You will install PHP-5.5"
-	;;
+	  echo "You will install PHP-5.5"
+	  ;;
 	3)
-		echo "You will install PHP-5.4"
-	;;
+	  echo "You will install PHP-5.4"
+	  ;;
 	4)
-		echo "You will install PHP-5.3"
-	;;
+	  echo "You will install PHP-5.3"
+	  ;;
 	5)
-		echo "You will install PHP-5.2.17"
-	;;
+	  echo "You will install PHP-5.2.17"
+	  ;;
 	*)
-		echo "No input, You will install PHP-5.6.12"
-		PHPSelect="1"
-	;;
+	  echo "No input, You will install PHP-5.6.12"
+	  PHPSelect="1"
 esac
 
 	
