@@ -23,23 +23,23 @@ if [ $? -eq 0 ]; then
 
 elif [ -d "$Nginx_base" ]; then
          echo -e  "\033[;32m Nginx already installed by Sources \033[0m"
-         read -p "Enter old 'Nginx Sources dir',  (eg: Nginx-1.8/  )    " Nginx_old_dir
+#         read -p "Enter old 'Nginx Sources dir',  (eg: Nginx-1.8/  )    " Nginx_old_dir
          echo -e "\033[;32m Removing Nginx ... \033[0m"
          cd $Nginx_old_dir && make uninstall ; make clean && cd /usr/local/ && rm -fr  Nginx/
 fi
 }
 
 
-function Install_Nginx-1.8 {
+function Install_Nginx_18 {
 
 clear 
-echo -e "============= \033[;34m Begin Install $Nginx_1.8_ver \033[0m ================="
+echo -e "============= \033[;34m Begin Install $Nginx_18_ver \033[0m ================="
 
 yum install pcre-devel -y 
 
 # Download Nginx 
 cd $Download_dir 
-wget $Nginx_1.8_url
+wget $Nginx_18_url
 
 # ======== Install Nginx ========
 # Create run_user: nginx  
@@ -73,19 +73,16 @@ sed -i.bak "/worker_processes/1/$Processor" $Nginx_base/conf/nginx.conf
 
 
 # Create test index_file 
-cat > /etc/nginx/html/index.h << END
+cat > /etc/nginx/html/index.html << END
 <?php
 phpinfo();
 ?>
-END 
-
+END
 
 # Start Nginx service 
 /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf
-
 		
-echo -e "============= \033[;32m  $Nginx_1.8_ver has been installed \033[0m ================="
-
+echo -e "============= \033[;32m  $Nginx_18_ver has been installed \033[0m ================="
 
 }
 
@@ -93,27 +90,12 @@ echo -e "============= \033[;32m  $Nginx_1.8_ver has been installed \033[0m ====
 function Remove_Nginx {
 
 clear 
-echo -e "============= \033[;34m  Begin Remove $Nginx_1.8_ver  \033[0m ================="
+echo -e "============= \033[;34m  Begin Remove $Nginx_18_ver  \033[0m ================="
 if [ -d $Nginx_base ]; then 
-	cd /usr/local/ && rm -fr Nginx
+	cd /usr/local/ && rm -fr nginx
 else 
-	echo -e "\033[;31m  Httpd not install, exit \033[0m "
+	echo -e "\033[;31m  Nginx not install, exit \033[0m "
 	exit 2
 fi
 
 }
-
- 
- 
- 
- 
- 
- 
-
-
-
-
-
- 
- 
-	

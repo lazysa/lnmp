@@ -8,11 +8,6 @@
 #!/bin/bash
  
  
-. init.sh
-. download_url.sh
-. version.sh
-
- 
 function Check_Mysql {
 # Check Mysql is or not install, remove installed version
 # Remove Pre-Built ( yum ) version or others source version 
@@ -26,19 +21,19 @@ if [ $? -eq 0 ]; then
 		echo -e "\033[;32m You has been installed MySQL via yum is detected, Removing MySQL ... \033[0m"
         yum remove mysql -y
 
-elif [ -d "$Mysql_base" ]; then
+elif [ -d "$Mysql_base" ] || [ -d "/opt/mysql" ]; then
          echo -e  "\033[;32m MySQL already installed by Sources \033[0m"
-         read -p "Enter old 'MySQL Sources dir',  (eg: ~/downloads/mysql-5.6.21/:  )    " Mysql_old_dir
+#         read -p "Enter old 'MySQL Sources dir',  (eg: ~/downloads/mysql-5.6.21/:  )    " Mysql_old_dir
          echo -e "\033[;32m Removing MySQL ... \033[0m"
          cd $Mysql_old_dir && make uninstall ; make clean && cd /usr/local/ && rm -fr  mysql/
 fi
 }
 
 
-function Install_Mysql-5.6 {
+function Install_Mysql_56 {
 
 clear 
-echo -e "============= \033[;34m Begin Install $Mysql_5.6_ver \033[0m ================="
+echo -e "============= \033[;34m Begin Install $Mysql_56_ver \033[0m ================="
 
 # Create run_user: mysql  
 groupadd mysql
@@ -51,13 +46,18 @@ done
 
 # Download Mysql source packages 
 cd $Download_dir 
-wget $Mysql_5.6_url
+
+if [ -f "$Mysql_56_ver.tar.gz" ]; then
+   tar -zxf $Mysql_56_ver.tar.gz
+else
+   wet $Mysql_56_url
+fi
 
 # make/make install Mysql 
-tar -zxf $Mysql_5.6_ver.tar.gz 
-cd $Mysql_5.6_ver 
-cmake --DCMAKE_INSTALL_PREFIX=$Mysql_base -DMYSQL_DATADIR=$Mysql_data -DSYSCONFDIR=/etc -DMYSQL_USER=$Mysql_user -DWITH_MYISAM_STORAGE_ENGING=1 -DWITH_INNOBASE_STORAGE_ENGINE=1 -DWITH_MEMORY_STORAGE_ENGINE=1 -DWITH_PARTITION_STORAGE_ENGINE=1 -DWITH_READLINE=1 -DMYSQL_UNIX_ADDR=$Mysql_libdir -DMYSQL_TCP_PORT=$Mysql_port -DENABLED_LOCAL_INFILE=1 -DEXTRA_CHARSETS=all -DDEFAULT_CHARSET=utf8 -DDEFAULT_COLLATION=utf8_general_ci
-make && install 
+tar -zxf $Mysql_56_ver.tar.gz 
+cd $Mysql_56_ver 
+cmake -DCMAKE_INSTALL_PREFIX=$Mysql_base -DMYSQL_DATADIR=$Mysql_data -DSYSCONFDIR=/etc -DMYSQL_USER=$Mysql_user -DWITH_MYISAM_STORAGE_ENGING=1 -DWITH_INNOBASE_STORAGE_ENGINE=1 -DWITH_MEMORY_STORAGE_ENGINE=1 -DWITH_PARTITION_STORAGE_ENGINE=1 -DWITH_READLINE=1 -DMYSQL_UNIX_ADDR=$Mysql_libdir -DMYSQL_TCP_PORT=$Mysql_port -DENABLED_LOCAL_INFILE=1 -DEXTRA_CHARSETS=all -DDEFAULT_CHARSET=utf8 -DDEFAULT_COLLATION=utf8_general_ci
+make && make install 
 
 # Create MySQL config
 cat  > /etc/my.cnf << END 					
@@ -70,7 +70,7 @@ socket = /var/lib/mysql/mysql.sock
 default-storage-engine = MyISAM
 user = mysql
 log-error = /var/log/mysql/error.log
-pid-file = /usr/local/mysql/mysql.pid
+pid-file = /var/lib/mysql/mysqld.pid
 sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
 END
 
@@ -92,7 +92,8 @@ source  ~/.bash_profile
 # Set Mysql's root password is: '123456' 
 mysql -uroot -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('123456');"
 
-echo -e "============= \033[;32m  $Mysql_5.6_ver has been installed \033[0m ================="
+echo -e "============= \033[;32m  $Mysql_56_ver has been installed \033[0m ================="
+
 
 }
 
@@ -101,7 +102,7 @@ echo -e "============= \033[;32m  $Mysql_5.6_ver has been installed \033[0m ====
 function Remove_Mysql {
 
 clear 
-echo -e "============= \033[;34m  Begin Remove $Mysql_5.6_ver  \033[0m ================="
+echo -e "============= \033[;34m  Begin Remove $Mysql_56_ver  \033[0m ================="
 if [ -d $Mysql_base ]; then 
 	cd /usr/local/ && rm -fr mysql
 else 

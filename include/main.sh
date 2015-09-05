@@ -12,10 +12,10 @@ echo -e "+++++++++++++  \033[;34m 3: Install MySQL-5.1.73 \033[0m +++++++++++++ 
 echo -e "+++++++++++++  \033[;34m 4: Install MariaDB-10.0.21 \033[0m +++++++++++++ "
 echo -e "+++++++++++++  \033[;34m 5: Install MariaDB-10.0.21 \033[0m +++++++++++++ "
 
-read -p "Enter your choice (1, 2, 3, 4 or 5): , otherwise select "1" DBSelect
+read -p "Enter your choice (1, 2, 3, 4 or 5): , otherwise select "1"" DB_Select
 
 
-case $DBSelect in 
+case $DB_Select in 
     1)
 	  echo "You will install MySQL-5.6.26"
 	  ;;
@@ -33,7 +33,7 @@ case $DBSelect in
 	  ;;
 	*)
 	  echo "No input,You will install MySQL-5.6.26"
-	  DBSelect="1"
+	  DB_Select="1"
 	  ;;	
 esac
 
@@ -44,9 +44,9 @@ echo -e  "You have 2 options for your Web_Server install."
 echo -e "+++++++++++++ \033[;34m 1: Install Apache-2.4 <Default> \033[0m +++++++++++++ "
 echo -e "+++++++++++++  \033[;34m 2: Install Apache-2.2 \033[0m +++++++++++++ "
 
-read -p "Enter your choice (1, 2): , otherwise select 1" WebSelect
+read -p "Enter your choice [1, 2]: , otherwise select 1" Apache_Select
 
-case $WebSelect in 
+case $Apache_Select in 
     1)
 	    echo "You will install Apache-2.4"
 	;;
@@ -55,7 +55,7 @@ case $WebSelect in
 	;;
 	*)
 		echo "No input,You will install Apache-2.4"
-		WebSelect="1"
+		Apache_Select="1"
 	;;
 esac
 
@@ -66,10 +66,10 @@ echo -e  "You have 2 options for your Web_Server install."
 echo -e "+++++++++++++ \033[;34m 1: Install Nginx-1.8 <Default> \033[0m +++++++++++++ "
 echo -e "+++++++++++++  \033[;34m 2: Install Nginx-1.6 \033[0m +++++++++++++ "
 
-read -p "Enter your choice (1, 2): , otherwise select 1" NginxSelect
+read -p "Enter your choice [1, 2]: , otherwise select 1" Nginx_Select
 
 
-case $NginxSelect in 
+case $Nginx_Select in 
     1)
 	  echo "You will Nginx-1.8"
 	  ;;
@@ -78,7 +78,7 @@ case $NginxSelect in
 	  ;;
 	*)
 	  echo "No input,You will install Nginx-1.8"
-	  NginxSelect="1"
+	  Nginx_Select="1"
 esac
 
 
@@ -93,10 +93,9 @@ echo -e "+++++++++++++  \033[;34m 3: Install php-5.4 \033[0m +++++++++++++ "
 echo -e "+++++++++++++  \033[;34m 4: Install php-5.3 \033[0m +++++++++++++ "
 echo -e "+++++++++++++  \033[;34m 5: Install php-5.2.17 \033[0m +++++++++++++ "
 
+read -p "Enter your choice [1, 2, 3, 4 or 5]: , otherwise select 1" PHP_Select
 
-read -p "Enter your choice (1, 2, 3, 4 or 5): , otherwise select 1" PHPSelect
-
-case $PHPSelect in 
+case $PHP_Select in 
     1)
 	  echo "You will install PHP-5.6.12"
 	  ;;
@@ -114,8 +113,28 @@ case $PHPSelect in
 	  ;;
 	*)
 	  echo "No input, You will install PHP-5.6.12"
-	  PHPSelect="1"
+	  PHP_Select="1"
 esac
 
-	
 }
+
+
+function Auto_Select {
+
+	  DB_Select="1"
+	  Apache_Select="1"
+	  Nginx_Select="1"
+	  PHP_Select="1"
+
+}
+
+
+
+
+
+
+
+
+
+
+	

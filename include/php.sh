@@ -8,9 +8,6 @@
 #!/bin/bash
  
 
-. init.sh
-. download_url.sh
-. version.sh
 
 
 function Check_PHP {
@@ -22,7 +19,7 @@ if [ $? -eq 0 ]; then
 
 elif [ -d /usr/local/php/ ]; then
          echo "Php already installed by Sources"
-         read -p "Enter old 'PHP Sources dir', (eg: /opt/downloads/php5.6.10/:    )" PHP_old_dir
+#         read -p "Enter old 'PHP Sources dir', (eg: /opt/downloads/php5.6.10/:    )" PHP_old_dir
          echo "Removing PHP..."
          cd $Mysql_old_dir && make uninstall ; make clean && cd /usr/local/ && rm -fr  php/
 fi
@@ -50,17 +47,17 @@ fi
 }
 
 
-function Install_PHP-5.6 {
+function Install_PHP_56 {
 
 clear 
-echo -e "============= \033[;34m Begin Install $PHP_5.6_ver  \033[0m ================="
+echo -e "============= \033[;34m Begin Install $PHP_56_ver  \033[0m ================="
 
 
 yum install libpng libjpeg -y 
 
 # Download some PHP Dependent Packages and PHP
 cd $Download_dir 
-wget $Bzip2_url $Libiconv_url $Libmcrypt_url $Mcrypt_url $Mhash_url $PHP_5.6_url 
+wget $Bzip2_url $Libiconv_url $Libmcrypt_url $Mcrypt_url $Mhash_url $PHP_56_url 
 
 # Download some PHP Extensions
 wget $Memcache_url $Xcache_url $Pdo_mysql_url 
@@ -117,7 +114,7 @@ make install
 cd ../ 
 
 
-echo "++++++++++++++++ Begin Install $PHP_5.6_ver +++++++++++++++++++"
+echo "++++++++++++++++ Begin Install $PHP_56_ver +++++++++++++++++++"
 ./configure --prefix=/usr/local/php --with-apxs2=$Apache_base/bin/apxs --with-config-file-path=/etc --with-config-file-scan-dir=/etc/php.d --enable-fpm --with-openssl --with-zlib --with-bz2 --with-gettext --with-mhash --with-mcrypt --with-iconv=/usr/local/libiconv --with-curl --with-gd --with-jpeg-dir --with-png-dir --with-mysql=/usr/local/mysql --with-pdo-mysql=/usr/local/mysql --enable-gd-native-ttf --enable-bcmath --enable-mbstring --enable-zip --enable-soap --enable-sockets --enable-ftp --without-pear 
 make && make install 
 cp php.ini-production /etc/php.ini  

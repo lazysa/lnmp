@@ -8,7 +8,7 @@
 #!/bin/bash
 
 
-Download_dir='/opt/downloads'
+Download_dir='/root/downloads'
 
 # MySQL 
 Mysql_base='/usr/local/mysql'
@@ -33,7 +33,7 @@ PHP_base='/usr/local/php'
   
 # Add Aliyun_mirrors  
 if [ -f /etc/yum.repos.d/CentOS-Base.repo ]; then
-    echo "Already add aliyum repos, nothing"
+    echo -e "\033[;32m Already add aliyum repos, nothing \033[0m"
 else
 
     OS_version=`cat /etc/redhat-release |awk '{print $3}' |awk -F. '{print $1'}`
@@ -61,7 +61,8 @@ else
 
 fi
 
-
+# Install necessary software
+yum install gcc cmake -y
 
 
 

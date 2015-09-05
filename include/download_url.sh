@@ -8,20 +8,20 @@
 #!/bin/bash
  
 
-Pcre_url='http://exim.mirror.fr/pcre/pcre-8.37.tar.gz'		  
+Pcre_url='http://exim.mirror.fr/pcre/pcre-8.37.tar.gz'
 Zlib_url='http://zlib.net/zlib-1.2.8.tar.gz'
 Bzip2_url='http://www.bzip.org/1.0.6/bzip2-1.0.6.tar.gz'
 Openssl_url='http://www.openssl.org/source/openssl-1.0.2d.tar.gz'
 
-Mysql_5.6_url='http://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.26.tar.gz'
+Mysql_56_url='http://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.26.tar.gz'
 Mariadb_10_url='http://mirrors.opencas.cn/mariadb/mariadb-10.0.21/source/mariadb-10.0.21.tar.gz'
-Postgresql_9.4_url='https://ftp.postgresql.org/pub/source/v9.4.4/postgresql-9.4.4.tar.gz'
+Postgresql_94_url='https://ftp.postgresql.org/pub/source/v9.4.4/postgresql-9.4.4.tar.gz'
 
-PHP_5.6_url='http://cn2.php.net/get/php-5.6.12.tar.gz/from/this/mirror'
+PHP_56_url='http://cn2.php.net/get/php-5.6.12.tar.gz/from/this/mirror'
 
-Nginx_1.8_url='http://nginx.org/download/nginx-1.8.0.tar.gz'
-Httpd_2.4_url='http://apache.fayea.com/httpd/httpd-2.4.16.tar.gz'
-Lighttpd_1.4_url='http://download.lighttpd.net/lighttpd/releases-1.4.x/lighttpd-1.4.36.tar.gz'
+Nginx_18_url='http://nginx.org/download/nginx-1.8.0.tar.gz'
+Httpd_24_url='http://apache.fayea.com/httpd/httpd-2.4.16.tar.gz'
+Lighttpd_14_url='http://download.lighttpd.net/lighttpd/releases-1.4.x/lighttpd-1.4.36.tar.gz'
 Spawn_fcgi_url='http://download.lighttpd.net/spawn-fcgi/releases-1.6.x/spawn-fcgi-1.6.4.tar.gz'
 
 # Apache Dependent Packages
