@@ -50,7 +50,7 @@ cd $Download_dir
 if [ -f "$Mysql_56_ver.tar.gz" ]; then
    tar -zxf $Mysql_56_ver.tar.gz
 else
-   wet $Mysql_56_url
+   wget $Mysql_56_url
 fi
 
 # make/make install Mysql 
@@ -90,7 +90,7 @@ sed -i 's#^PATH=.*#&:$Mysql_home/bin#' ~/.bash_profile
 source  ~/.bash_profile
 
 # Set Mysql's root password is: '123456' 
-mysql -uroot -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('123456');"
+mysql -S $Mysql_libdir/mysql.sock -uroot -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('123456');"
 
 echo -e "============= \033[;32m  $Mysql_56_ver has been installed \033[0m ================="
 

@@ -47,13 +47,13 @@ echo "+------------------------------------------------------------------------+
 
 
 function DO_LAMP {
-if [ "$DB_Select" = "1" ]; then
-     Check_Mysql ; Install_Mysql_56 
+#if [ "$DB_Select" = "1" ]; then
+#     Check_Mysql ; Install_Mysql_56 
 # elif [ "DB_Select" = "2" ]; then 
 #	Install_Mysql_55
 # elif [ "DB_Select" = "3" ]; then
 #	Install_Mysql_51
-fi
+#fi
 
 if [ "$Apache_Select" = "1" ]; then
      Chenck_Apache ; Install_Apache_24  
@@ -64,8 +64,8 @@ if [ "$Apache_Select" = "1" ]; then
 fi
 
 
-if [ "$PHP_Select" = "1" ]; then
-       Check_PHP ; Install_PHP_56  
+#if [ "$PHP_Select" = "1" ]; then
+#       Check_PHP ; Install_PHP_56  
 # elif [ "PHP_Select" = "2" ]; then 
 #	Install_PHP_55 
 # elif [ "PHP_Select" = "3" ]; then
@@ -74,7 +74,7 @@ if [ "$PHP_Select" = "1" ]; then
 #	Install_PHP_53 
 # elif [ "PHP_Select" = "5" ]; then
 #	Install_PHP_52 
-fi
+#fi
 
 }
 
