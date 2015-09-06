@@ -23,7 +23,7 @@ Postgresql_94_ver='postgresql-9.4.4'
 
 # Apache Dependent Packages
 Apr_ver='apr-1.5.2'
-Apr_util_ver='apr-1.5.2'
+Apr_util_ver='apr-util-1.5.4'
 
 Nginx_18_ver='nginx-1.8'
 Apache_24_ver='httpd-2.4.16'
