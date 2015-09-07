@@ -46,7 +46,6 @@ elif [ -d "$PHP_base" ]; then
 fi
 }
 
-
 function Install_PHP_56 {
 
 clear 
@@ -67,12 +66,11 @@ wget $Memcache_url $Xcache_url $Pdo_mysql_url
 echo "+++++++++ Begin Install $Bzip2_ver +++++++++++"
 tar -zxf $Bzip2_ver.tar.gz
 cd $Bzip2_ver
-vim Makefile
 # To assist in cross-compiling
-CC=gcc -fPIC 
+sed -i.bak '/^CC/s/gcc/& -fPIC/' Makefile
 make 
 make install 
-
+cd ../
 
 echo "+++++++++ Begin Install $Libiconv_ver +++++++++++"
 tar -zxf $Libiconv_ver.tar.gz 
@@ -106,7 +104,7 @@ cd ../
 
 
 echo "+++++++++ Begin Install $Mash_ver +++++++++++"
-tar -jxf $Mhash_ver.tar.gz  
+tar -zxf $Mhash_ver.tar.gz  
 cd $Mhash_ver
 ./configure 
 make 
@@ -115,6 +113,8 @@ cd ../
 
 
 echo "++++++++++++++++ Begin Install $PHP_56_ver +++++++++++++++++++"
+tar -zxf $PHP_56_ver.tar.gz
+cd $PHP_56_ver
 ./configure --prefix=/usr/local/php --with-apxs2=$Apache_base/bin/apxs --with-config-file-path=/etc --with-config-file-scan-dir=/etc/php.d --enable-fpm --with-openssl --with-zlib --with-bz2 --with-gettext --with-mhash --with-mcrypt --with-iconv=/usr/local/libiconv --with-curl --with-gd --with-jpeg-dir --with-png-dir --with-mysql=/usr/local/mysql --with-pdo-mysql=/usr/local/mysql --enable-gd-native-ttf --enable-bcmath --enable-mbstring --enable-zip --enable-soap --enable-sockets --enable-ftp --without-pear 
 make && make install 
 cp php.ini-production /etc/php.ini  
@@ -128,6 +128,7 @@ cd $Memcache_ver
 /usr/local/php/bin/phpize
 ./configure --with-php-config=$PHP_base/bin/php-config 
 make && make install 
+cd ../
 
 echo "+++++++++ Begin Install $Xcache_ver +++++++++++"
 wget $Xcache_url
@@ -155,6 +156,7 @@ END
 # Create Xcache cache file 
 touch /tmp/xcache 
 chmod 777 /tmp/xcache 
+cd ../
 
 echo "+++++++++ Begin Install $Pdo_mysql_ver +++++++++++"
 wget $Pdo_mysql_url
@@ -180,7 +182,7 @@ cp -a /usr/local/php/etc/php-fpm.conf.default $PHP_base/etc/php-fpm.conf
 cp /usr/src/php-5.6.12/sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
 
 # Change php-fpm run_user 
-sed -i '/^user/s/nobody/php-fpm/' $PHP_base/php/etc/php-fpm.conf 
+sed -i '/^user/s/nobody/php-fpm/' $PHP_base/etc/php-fpm.conf 
 sed -i '/^group/s/nobody/php-fpm/' $PHP_base/etc/php-fpm.conf
 
 chmod a+x /etc/init.d/php-fpm

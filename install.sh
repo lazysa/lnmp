@@ -47,13 +47,15 @@ echo "+------------------------------------------------------------------------+
 
 
 function DO_LAMP {
-#if [ "$DB_Select" = "1" ]; then
-#     Check_Mysql ; Install_Mysql_56 
+if [ "$DB_Select" = "1" ]; then
+     Check_Mysql ; Install_Mysql_56 
 # elif [ "DB_Select" = "2" ]; then 
 #	Install_Mysql_55
 # elif [ "DB_Select" = "3" ]; then
 #	Install_Mysql_51
-#fi
+# elif [ "DB_Select" = "4" ]; then
+#	Install_Mariadb_10
+fi
 
 if [ "$Apache_Select" = "1" ]; then
      Chenck_Apache ; Install_Apache_24  
@@ -64,8 +66,43 @@ if [ "$Apache_Select" = "1" ]; then
 fi
 
 
+if [ "$PHP_Select" = "1" ]; then
+       Check_PHP ; Install_PHP_56  
+# elif [ "PHP_Select" = "2" ]; then 
+#	Install_PHP_55 
+# elif [ "PHP_Select" = "3" ]; then
+#	Install_PHP_54 
+# elif [ "PHP_Select" = "4" ]; then
+#	Install_PHP_53 
+# elif [ "PHP_Select" = "5" ]; then
+#	Install_PHP_52 
+fi
+
+}
+
+
+function DO_LNMP {
+#if [ "$DB_Select" = "1" ]; then
+#	Check_Mysql ; Install_Mysql_56 
+# elif [ "DB_Select" = "2" ]; then 
+#	Install_Mysql_55
+# elif [ "DB_Select" = "3" ]; then
+#	Install_Mysql_51
+# elif [ "DB_Select" = "4" ]; then
+#	Install_Mariadb_10
+#fi
+
+
+#if [ "$Nginx_Select" = "1" ]; then
+	Install_Nginx_18  
+# elif [ "Nginx_Select" = "2" ]; then 
+#	Install_Nginx_22 
+# elif [ "Nginx_Select" = "3" ]; then
+#	Install_Nginx_24 
+#fi
+
 #if [ "$PHP_Select" = "1" ]; then
-#       Check_PHP ; Install_PHP_56  
+#	Check_PHP ; Install_PHP_56  
 # elif [ "PHP_Select" = "2" ]; then 
 #	Install_PHP_55 
 # elif [ "PHP_Select" = "3" ]; then
@@ -75,39 +112,6 @@ fi
 # elif [ "PHP_Select" = "5" ]; then
 #	Install_PHP_52 
 #fi
-
-}
-
-
-function DO_LNMP {
-if [ "$DB_Select" = "1" ]; then
-	Check_Mysql ; Install_Mysql_56 
-# elif [ "DB_Select" = "2" ]; then 
-#	Install_Mysql_55
-# elif [ "DB_Select" = "3" ]; then
-#	Install_Mysql_51
-fi
-
-
-if [ "$Nginx_Select" = "1" ]; then
-	Install_Nginx_18  
-# elif [ "Nginx_Select" = "2" ]; then 
-#	Install_Nginx_22 
-# elif [ "Nginx_Select" = "3" ]; then
-#	Install_Nginx_24 
-fi
-
-if [ "$PHP_Select" = "1" ]; then
-	Check_PHP ; Install_PHP_56  
-# elif [ "PHP_Select" = "2" ]; then 
-#	Install_PHP_55 
-# elif [ "PHP_Select" = "3" ]; then
-#	Install_PHP_54 
-# elif [ "PHP_Select" = "4" ]; then
-#	Install_PHP_53 
-# elif [ "PHP_Select" = "5" ]; then
-#	Install_PHP_52 
-fi
 		
 }
 

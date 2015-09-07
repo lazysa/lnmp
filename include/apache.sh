@@ -76,8 +76,8 @@ make && make install
 cp build/rpm/httpd.init /etc/init.d/httpd  
 chmod a+x /etc/init.d/httpd 
 chkconfig --add httpd 
-sed -i.bak "/^httpd/i httpd=\'/usr/local/apache/bin/httpd\'" /etc/init.d/httpd
-sed -i "/^pidfile/i pidfile=\'/var/lib/httpd/httpd.pid'" /etc/init.d/httpd
+sed -i.bak "/^httpd/i HTTPD=\'/usr/local/apache/bin/httpd\'" /etc/init.d/httpd
+sed -i "/^pidfile/i PIDFILE=\'/var/lib/httpd/httpd.pid'" /etc/init.d/httpd
 
 # Change Apache run_user: apache
 sed -i.bak '/daemon$/s/daemon/apache/' /etc/httpd/conf/httpd.conf
@@ -98,6 +98,7 @@ END
 # Add $Apache_base to root's user_variable
 sed  -i.bak "/^# User/a Apache_home='/usr/local/apache'" ~/.bash_profile
 sed -i 's#^PATH=.*#&:$Apache_home/bin#' ~/.bash_profile
+ln -s /usr/local/apache /etc/httpd
 source  ~/.bash_profile
 
 # Start Apache service 

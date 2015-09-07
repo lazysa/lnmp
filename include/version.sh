@@ -25,7 +25,7 @@ Postgresql_94_ver='postgresql-9.4.4'
 Apr_ver='apr-1.5.2'
 Apr_util_ver='apr-util-1.5.4'
 
-Nginx_18_ver='nginx-1.8'
+Nginx_18_ver='nginx-1.8.0'
 Apache_24_ver='httpd-2.4.16'
 Lighttpd_14_ver='lighttd-1.4.36'
 Spawn_fcgi_ver='spawn-fcgi-1.6.4'
@@ -35,7 +35,7 @@ Spawn_fcgi_ver='spawn-fcgi-1.6.4'
 # PHP Dependent Packages
 Libiconv_ver='libiconv-1.14'
 Libmcrypt_ver='libmcrypt-2.5.8'
-Mcrypt_ver='Mcrypt-2.6.8'
+Mcrypt_ver='mcrypt-2.6.8'
 Mhash_ver='mhash-0.9.9.9'
 
 

@@ -26,7 +26,7 @@ case $DB_Select in
 	  echo "You will install MySQL-5.6.26"
 	  ;;
 	4)
-	  echo "You will install MySQL-5.6.26"
+	  echo "You will install Mariadb-10.0.21"
 	  ;;
 	5)
 	  echo "You will install MySQL-5.6.26"

@@ -9,7 +9,7 @@
  
 
 
- function Chenck_Nginx {
+function Chenck_Nginx {
 # Check Nginx is install, remove Pre-Built version
 
 clear 
@@ -52,7 +52,8 @@ for i in /usr/local/nginx /var/log/nginx /var/lib/nginx ; do
 	 mkdir -p $i && chown -R nginx:nginx $i 
 done 
 
-cd $Nginx_1.8_ver
+tar -zxf $Nginx_18_ver.tar.gz
+cd $Nginx_18_ver
 ./configure --prefix=$Nginx_base --with-ipv6 --user=nginx --group=nginx --pid-path=/var/lib/nginx/nginx.pid --http-log-path=/var/log/nginx/access.log --error-log-path=/var/log/nginx/error.log --with-http_stub_status_module --with-http_ssl_module --with-http_gzip_static_module --with-pcre=/opt/downloads/pcre-8.37 --with-zlib=/opt/downloads/zlib-1.2.8 --with-openssl=/opt/downloads/openssl-1.0.2d --without-mail_pop3_module --without-mail_imap_module --without-mail_smtp_module
 make && make install
 
@@ -60,16 +61,16 @@ ln -s /usr/local/nginx /etc/nginx
 
 
 # Add $Nginx_base to root's user_variable
-sed  -i.bak "/^# User/a Nginx_home='/usr/local/nginx'" ~/.bash_profile
+sed -i.bak "/^# User/a Nginx_home='/usr/local/nginx'" ~/.bash_profile
 sed -i 's#^PATH=.*#&:$Nginx_home/sbin#' ~/.bash_profile
 source  ~/.bash_profile
 
-cat ../conf/nginx.conf > /etc/nginx/conf/nginx/conf
+cp -a conf/nginx.conf  /etc/nginx/conf/
 
 ### Config Nginx  
-#
+# Modify Nginx processor 
 Processor=`grep "processor" /proc/cpuinfo |wc -l` 
-sed -i.bak "/worker_processes/1/$Processor" $Nginx_base/conf/nginx.conf
+sed -i.bak "/worker_processes/s/1/$Processor/" $Nginx_base/conf/nginx.conf
 
 
 # Create test index_file 

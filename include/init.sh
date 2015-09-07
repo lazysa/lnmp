@@ -7,17 +7,26 @@
  #* *****************************************************************************/
 #!/bin/bash
 
-
+# Define all variable
+# Common
 Download_dir='/root/downloads'
 
-# MySQL 
+# MySQL variable
 Mysql_base='/usr/local/mysql'
 Mysql_data='/data0/mysql'
 Mysql_libdir='/var/lib/mysql'
 Mysql_logdir='/var/log/mysql'
-Mysql_port='3306'
+Mysql_port='3336'
 Mysql_user='mysql'
 	
+# Mariadb
+Mariadb_base='/usr/local/mariadb
+Mariadb_data='/data0/mariadb
+Mariadb_libdir='/var/lib/mariadb
+Mariadb_logdir='/var/log/mariadb
+Mariadb_port='3356'
+Mariadb_user='mariadb'
+
 # Apache 
 Apache_base='/usr/local/apache'
 Apache_libdir='/var/lib/httpd'
@@ -62,7 +71,7 @@ else
 fi
 
 # Install necessary software
-yum install gcc cmake -y
+yum install gcc cmake libtool -y
 
 
 
