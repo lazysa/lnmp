@@ -37,6 +37,12 @@ Nginx_base='/usr/local/nginx'
 Nginx_libdir='/var/lib/nginx'
 Nginx_logdir='/var/log/nginx'
 
+# Lighttpd
+Lighttpd_base='/usr/local/lighttpd'
+Lighttpd_libdir='/var/lib/lighttpd'
+Lighttpd_logdir='/var/log/lighttpd'
+
+
 # PHP 
 PHP_base='/usr/local/php'
   

@@ -2,7 +2,7 @@
 # Description:   Auto-Install script for the Mariadb Server
   
 function Check_Mariadb {
-# Check Mysql is or not install, remove installed version
+# Check Mariadb is or not install, remove installed version
 # Remove Pre-Built ( yum ) version or others source version 
 
 clear 
