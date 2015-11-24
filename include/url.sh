@@ -8,7 +8,7 @@
 #!/bin/bash
  
 
-# Declare array {URL
+# Declare array {URL}
 declare -A URL
 
 URL[pcre]='http://exim.mirror.fr/pcre/pcre-8.37.tar.gz'
