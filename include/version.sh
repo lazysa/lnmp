@@ -26,5 +26,5 @@ for i in `echo "${SOFT[@]}"` ; do
 	shift  
 done 
 #
-echo  ${VERSION[zlib]} ${VERSION[pcre]} ${VERSION[php56]} ${VERSION[pdo_mysql]}
+# eg: echo  ${VERSION[zlib]} ${VERSION[pcre]} ${VERSION[php56]} ${VERSION[pdo_mysql]}
  

@@ -20,7 +20,7 @@ export PATH
 . ./include/php.sh  
 
 # Check Current run user is'nt root 
-CUID=$(id -u)
+CUID=`id -u`
 if [ "$CUID" -ne 0 ]; then 
 	echo -e "============= \033[;31m The bash scripts must be run by the root user，exit \033[0m ================="
 	exit 2
@@ -46,7 +46,7 @@ echo "+------------------------------------------------------------------------+
 
 function DO_LAMP {
 	if [ "$DB_Select" = "1" ]; then
-	     Check_Mysql ; Install_Mysql_56 
+	      Check_Mysql ; Install_Mysql_56 
 	# elif [ "DB_Select" = "2" ]; then 
 	#	Install_Mysql_55
 	# elif [ "DB_Select" = "3" ]; then
@@ -117,34 +117,34 @@ function DO_LNMP {
 function DO_VERSION {
 
 	if [ -n "$DBSelect" ]; then 
-	Mysql_DO_VERSION=`$Mysql_base/mysqld -V |awk '{print $3}'`
+		Mysql_DO_VERSION=`$Mysql_base/mysqld -V |awk '{print $3}'`
 	else 
-	    echo -e "============= \033[;31m MySQL no install，exit \033[0m ================="
+	        echo -e "============= \033[;31m MySQL no install，exit \033[0m ================="
 	exit 2
 	fi
 
 
 	if [ -n "$WebSelect" ]; then 
-	Apache_DO_VERSION=`$Apache_base/bin/httpd -V |sed -n '1p' |cut -d/ -f2 |awk '{print $1}'`
+		Apache_DO_VERSION=`$Apache_base/bin/httpd -V |sed -n '1p' |cut -d/ -f2 |awk '{print $1}'`
 	else 
-	    echo -e "============= \033[;31m Apache no install，exit \033[0m ================="
+	        echo -e "============= \033[;31m Apache no install，exit \033[0m ================="
 	exit 2
 	fi
 
 
 	if [ -n "$PHPSelect" ]; then 
-	PHP_DO_VERSION=`$PHP_base/bin/php -v  /usr/local/php/bin/php -v |grep "cli" |awk '{print $2}'`
+		PHP_DO_VERSION=`$PHP_base/bin/php -v  /usr/local/php/bin/php -v |grep "cli" |awk '{print $2}'`
 	else 
-	    echo -e "============= \033[;31m PHP no install，exit \033[0m ================="
-	exit 2
+	        echo -e "============= \033[;31m PHP no install，exit \033[0m ================="
+	        exit 2
 	fi
 
 
 	if [ -n "$NginxSelect" ]; then 
-	Nginx_DO_VERSION=`$Nginx_base/sbin/nginx -v |cut -d/ -f2`
+		Nginx_DO_VERSION=`$Nginx_base/sbin/nginx -v |cut -d/ -f2`
 	else 
-	    echo -e "============= \033[;31m Nginx no install，exit \033[0m ================="
-	exit 2
+	        echo -e "============= \033[;31m Nginx no install，exit \033[0m ================="
+	        exit 2
 	fi
 
 
@@ -214,7 +214,7 @@ function Display_Select {
 
 
 	case $DB_Select in 
-	    1)
+	        1)
 		  echo "You will install MySQL-5.6.26"
 		  ;;
 		2)
@@ -245,16 +245,16 @@ function Display_Select {
 	read -p "Enter your choice [1, 2]: , otherwise select 1" Apache_Select
 
 	case $Apache_Select in 
-	    1)
+	         1)
 		    echo "You will install Apache-2.4"
-		;;
-		2)
-			echo "You will install Apache-2.2"
-		;;
-		*)
-			echo "No input,You will install Apache-2.4"
-			Apache_Select="1"
-		;;
+	            ;;
+		 2)
+		    echo "You will install Apache-2.2"
+		    ;;
+		 *)
+		    echo "No input,You will install Apache-2.4"
+		    Apache_Select="1"
+		    ;;
 	esac
 
 
@@ -268,7 +268,7 @@ function Display_Select {
 
 
 	case $Nginx_Select in 
-	    1)
+	         1)
 		  echo "You will Nginx-1.8"
 		  ;;
 		2)
@@ -294,7 +294,7 @@ function Display_Select {
 	read -p "Enter your choice [1, 2, 3, 4 or 5]: , otherwise select 1" PHP_Select
 
 	case $PHP_Select in 
-	    1)
+	        1)
 		  echo "You will install PHP-5.6.12"
 		  ;;
 		2)
