@@ -12,18 +12,18 @@ LNMP_Ver='1.0'
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 
-. ./include/main.sh
-. ./include/init.sh
-. ./include/download_url.sh
-. ./include/version.sh
-. ./include/mysql.sh  
-. ./include/apache.sh  
-. ./include/nginx.sh  
-. ./include/php.sh  
+. /include/main.sh
+. /include/init.sh
+. /include/download.sh
+. /include/version.sh
+. /include/mysql.sh  
+. /include/apache.sh  
+. /include/nginx.sh  
+. /include/php.sh  
 
 # Check Current run user is'nt root 
-Curr_uid=`id -u`
-if [ "$Curr_uid" -ne 0 ]; then 
+CUID=$(id -u)
+if [ "$CUID" -ne 0 ]; then 
 	echo -e "============= \033[;31m The bash scripts must be run by the root user，exit \033[0m ================="
 	exit 2
 fi 
@@ -187,14 +187,14 @@ case $1 in
     -v|-V)
           VERSION 
 	  echo -e "============= \033[;34m List All software Version: \033[0m ================="
-          echo -e "============= \033[;34m $All_Version \033[0m ================="
+#	  echo "${VERSION[@]}"
          ;;
     remove)
          Remove_Mysql ; Remove_Apache ; Remove_PHP ; Remove_Nginx
          ;;
 
     *)
-      echo -e "\033[;31m  Usage: $0 <lamp|lnmp|-v|remove> [auto] \033[0m "
+      echo -e "\033[;31m  Usage: $0 {lamp|lnmp|-v[-V]|remove} [auto] \033[0m "
       exit 2
 esac
 
