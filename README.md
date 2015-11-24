@@ -11,3 +11,7 @@ cd lnmp-master
 ```
 
 
+install.sh 
+init.sh
+url.sh
+version.sh

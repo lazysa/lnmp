@@ -47,7 +47,7 @@ Lighttpd_logdir='/var/log/lighttpd'
 PHP_base='/usr/local/php'
   
 # Add Aliyun_mirrors  
-if [ -f /etc/yum.repos.d/CentOS-Base.repo ]; then
+if [ -f '/etc/yum.repos.d/CentOS-Base.repo' ]; then
     echo -e "\033[;32m Already add aliyum repos, nothing \033[0m"
 else
 
