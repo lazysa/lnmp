@@ -11,9 +11,9 @@ cd lnmp-master
 ```
 
 # Main files intro
-install.sh -> Accept input args 
-include/init.sh -> Init install environment
-include/url.sh -> All software url 
-include/version.sh -> All software version 
+install.sh -> Accept input args <br>
+include/init.sh -> Init install environment <br>
+include/url.sh -> All software url <br>
+include/version.sh -> All software version <br>
 
 
