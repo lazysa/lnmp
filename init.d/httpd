@@ -117,7 +117,7 @@ case "$1" in
 	stop
 	;;
   status)
-        if ! test -f ${pidfile}; then
+        if test ! -f ${pidfile}; then
             echo $prog is stopped
             RETVAL=3
         else  
